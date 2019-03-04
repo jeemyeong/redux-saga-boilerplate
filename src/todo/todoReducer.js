@@ -16,6 +16,14 @@ export const todos = (state = [], action) => {
       return [
         ...state
       ];
+    case todoActionTypes.TODO_COMPLETE_ALL:
+      return [
+        ...state.map(todo => ({...todo, completed: true}))
+      ];
+    case todoActionTypes.TODO_INCOMPLETE_ALL:
+      return [
+        ...state.map(todo => ({...todo, completed: false}))
+      ];
     default:
       return state;
   }

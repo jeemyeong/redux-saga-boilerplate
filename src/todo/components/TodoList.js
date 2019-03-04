@@ -1,14 +1,18 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { toggleTodoComplete } from "../todoActions.js";
+import { completeAllTodos, incompleteAllTodos, toggleTodoComplete } from "../todoActions.js";
 
 const TodoList = ({
   todos,
-  toggleTodoComplete
+  toggleTodoComplete,
+  completeAllTodos,
+  incompleteAllTodos
 }) => {
+
+  const allCompleted = !todos.map(todo => todo.completed).includes(false);
   return (
     <section className="main">
-      <input id="toggle-all" className="toggle-all" type="checkbox"/>
+      <input id="toggle-all" className="toggle-all" type="checkbox" onClick={() => allCompleted ? incompleteAllTodos() : completeAllTodos()}/>
       <label htmlFor="toggle-all">Mark all as complete</label>
       <ul className="todo-list">
         {todos.map(todo => (
@@ -28,6 +32,8 @@ const TodoList = ({
 export default connect(
   ({todos}) => ({todos}),
   {
-    toggleTodoComplete
+    toggleTodoComplete,
+    completeAllTodos,
+    incompleteAllTodos
   }
 )(TodoList);

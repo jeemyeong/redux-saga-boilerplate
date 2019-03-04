@@ -18,6 +18,8 @@ const TodoInput = ({
         value={todoForm.value}
         onChange={e => changeInput(e.target.value)}
         onKeyUp={e => e.key === "Enter" && (addTodo(todoForm.value))}
+        onFocus={() => focusInput(true)}
+        onBlur={() => focusInput(false)}
       />
     </header>
   );
